@@ -1,24 +1,24 @@
 <template>
   <div class="hot-chart">
-    <el-card class="box-card">
-      <div class="body">
-        <el-tabs v-model="activeName">
-          <el-tab-pane label="热点办理事项" name="management">
-            <div class=" chart">
-              <div class="time-position">
-                <div class="block">
-                  <span class="demonstration">统计时间</span>
-                  <el-date-picker v-model="value" type="month" format="yyyy 年 MM 月"  placeholder="选择月份">
-                  </el-date-picker>
-                </div>
+    <!--<el-card class="box-card">-->
+    <div class="body">
+      <el-tabs v-model="activeName">
+        <el-tab-pane label="热点办理事项" name="management">
+          <div class=" chart">
+            <div class="time-position">
+              <div class="block">
+                <span class="demonstration">统计时间</span>
+                <el-date-picker v-model="value" type="month" format="yyyy 年 MM 月" placeholder="选择月份">
+                </el-date-picker>
               </div>
-              <div class="management-chart-content"></div>
             </div>
-          </el-tab-pane>
-          <el-tab-pane label="热点关注事项" name="attention">热点关注事项</el-tab-pane>
-        </el-tabs>
-      </div>
-    </el-card>
+            <div class="management-chart-content"></div>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="热点关注事项" name="attention">热点关注事项</el-tab-pane>
+      </el-tabs>
+    </div>
+    <!--</el-card>-->
   </div>
 </template>
 <script>
@@ -26,6 +26,8 @@
   import {
     chart
   } from "../../common/helper.js";
+  import { Notification } from 'element-ui';
+  const master = Http.url.master;
   export default {
     data() {
       return {
@@ -34,6 +36,28 @@
       }
     },
     mounted() {
+    //  Http.fetch({
+    //       method: "get",
+    //       url: master + "/ranking/hort_projects",
+    //       params: {
+    //          top: '',
+    //          beginTime:'2016',
+    //          endTime: ''
+    //       }
+    //     }).then(
+    //       function (result) {
+    //         console.log(result.data)
+    //         // if(result.data.head.status==200){
+    //         //    console.log(result.data)
+    //         // }else{
+    //         //   Notification ({
+    //         //     type: 'warning',
+    //         //     message: result.data.head.message,
+    //         //     // offset:100
+    //         //   });
+    //         // }
+           
+    //       });
       chart(".management-chart-content", {
         tooltip: {
           trigger: 'axis',
@@ -110,9 +134,18 @@
   .hot-chart {
     width: 100%;
     height: 100%;
+    .body {
+      box-sizing: border-box;
+      border: none !important;
+      color: @color-font-light;
+      background-color: transparent !important;
+      display: flex;
+      flex-direction: column;
+    }
     .chart {
       color: @color-font-deep;
       font-size: @size-text-large;
+      padding:1.25rem;
       .time-position {
         display: flex;
         flex-direction: row;

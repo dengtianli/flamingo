@@ -1,0 +1,29 @@
+{
+  "head": {
+    "status": 200,
+    "token": null,
+    "message": null,
+    "total": 4
+  },
+  "body": [{
+    "promiseCount": 0,
+    "totalCount": 0,
+    "QuarterType": "FIRST",
+    "instantCount": 0
+  }, {
+    "promiseCount": 1,
+    "totalCount": 1,
+    "QuarterType": "SECOND",
+    "instantCount": 0
+  }, {
+    "promiseCount": 141,
+    "totalCount": 239,
+    "QuarterType": "THIRD",
+    "instantCount": 98
+  }, {
+    "promiseCount": 12,
+    "totalCount": 14,
+    "QuarterType": "FOURTH",
+    "instantCount": 2
+  }]
+}

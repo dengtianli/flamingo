@@ -1,11 +1,15 @@
 <template>
   <div class="analysis-transact">
-    <!--<div class="row">
-                <span>统计时间</span>
-                <el-select placeholder="2016年2月">
-                  <el-option></el-option>
-                </el-select>
-              </div>-->
+    <div class="row block">
+      <span class="demonstration">统计时间</span>
+      <el-date-picker
+        v-model="value"
+        type="month"
+        onClick="changeDate()"
+        format="yyyy 年 MM 月"
+        placeholder="选择月份">
+      </el-date-picker>
+    </div>
     <div class="row row1">
       <div class="chart1">
         <row1-chart1></row1-chart1>
@@ -62,6 +66,8 @@ import Row2Chart1 from "./row2/chart1.vue";
 import Row2Chart2 from "./row2/chart2.vue";
 // row3
 import Row3Chart from "./row3/chart.vue";
+import { Notification  } from 'element-ui';
+const master = Http.url.master;
 export default {
   components: {
     // row1
@@ -73,8 +79,40 @@ export default {
     // row3
     Row3Chart,
   },
-  // mounted() {
-  // }
+  mounted() {
+     Http.fetch({
+          method: "get",
+          url: master + "/analysis/projects/projects_apply",
+          params: {
+             year:'2016' ,
+             organ: 78
+          }
+        }).then(
+          function (result) {
+            let data =result.data
+            console.log(data)
+            if(Http.protocol(data,200)){
+                // result.data.body.
+            }else{
+              Notification ({
+                type: 'warning',
+                message: h('i', { style: 'color: teal'},data.head.message)
+                // offset:100
+              });
+            }
+           
+          })
+  },
+  data(){
+    return {
+       value: '2016-04',
+    }
+  },
+  methods: {
+    changeDate(vm) {
+     console.log(this.value)
+    }
+  }
 }
 </script>
 
@@ -83,6 +121,10 @@ export default {
 .analysis-transact {
   display: flex;
   flex-direction: column;
+  .block{
+    color: @color-font-deep;
+    font-size: @size-text-large;
+  }
   .row1 {
     width: 100%;
     height: 27.06rem;

@@ -1,0 +1,13 @@
+{
+  "head": {
+    "status": 200,
+    "token": null,
+    "message": null,
+    "total": 1
+  },
+  "body": [{
+    "peopleFlowNum": 178,
+    "acceptNum": 3910,
+    "agreedNum": 3885
+  }]
+}

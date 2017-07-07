@@ -27,6 +27,8 @@
   import {
     chart
   } from "../../common/helper.js";
+  import { Notification  } from 'element-ui';
+  const master = Http.url.master;
   export default {
     data() {
       return {
@@ -34,6 +36,28 @@
       }
     },
     mounted() {
+      // Http.fetch({
+      //     method: "get",
+      //     url: master + "/ranking/department_accepts",
+      //     params: {
+      //        top: 6 ,
+      //        beginTime:'2016' ,
+      //        endTime: ''
+      //     }
+      //   }).then(
+      //     function (result) {
+      //      console.log(result.data)
+      //       if(result.data.head.status==200){
+      //          console.log(result.data)
+      //       }else{
+      //         Notification ({
+      //           type: 'warning',
+      //           message: result.data.head.message,
+      //           // offset:100
+      //         });
+      //       }
+           
+      //     });
       chart(".department-chart-content", {
         tooltip: {
           trigger: 'axis',

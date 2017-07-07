@@ -41,7 +41,7 @@ import hotItems from "./row3/hotItems.vue";
 import sichuanMap from "./row1/sichuanMap.vue";
 import total from "./row1/total.vue";
 import latestDate from "./row1/latestDate.vue";
-
+const master = Http.url.master;
 export default {
   components: {
     sichuanMap,
@@ -54,7 +54,7 @@ export default {
   mounted() {
     Http.fetch({
       method: "GET",
-      url: Http.url.master + "/sys/logs"
+      url: master + "/sys/logs"
     })
       .then(function (result) {
         console.log(result.data.head);
