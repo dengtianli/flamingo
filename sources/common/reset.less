@@ -1,0 +1,115 @@
+@import "./base.less";
+
+/** Reset */
+
+html {
+  .fill;
+  .clean;
+  body {
+    .fill;
+    .clean;
+    font-size: 16px;
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    background: @dark-white;
+    #app {
+      .fill;
+      .clean;
+    }
+  }
+}
+
+a,
+a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
+  color: @black;
+}
+
+.el-dropdown-menu {
+  font-size: 0.9rem;
+  color: @black;
+}
+
+.el-card {
+  .fill;
+  border: none !important;
+  color: @color-font-light;
+  background-color: transparent !important;
+  display: flex;
+  flex-direction: column;
+  .el-card__header {
+    background: @color-backgound-light;
+    border-bottom: none;
+  }
+  .el-card__body {
+    background: @color-backgound-regular;
+    height: 100%;
+  }
+}
+
+.el-tabs {
+  .el-tabs__header {
+    border-bottom: 1px solid @color-font-deep;
+  }
+}
+.el-table {
+  color:@color-font-light !important;
+  border:none !important;
+  background-color:@color-backgound-regular !important;
+}
+.el-table .cell, .el-table th>div {
+    padding-left: 0!important;
+    padding-right: 0!important;
+    text-align: center;
+    line-height: 60px;
+}
+
+.el-table th>.cell {
+    word-wrap: normal;
+    text-overflow: ellipsis;
+    line-height: 30px;
+    width: 100%;
+    background: @color-backgound-light;
+    height: 3.75rem;
+    padding: 12px;
+    color: @color-font-light;
+    text-align: center;
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.el-table tr{
+    background-color: @color-backgound-regular !important;
+}
+.el-table td, .el-table th.is-leaf{
+  border-bottom: 1px solid @color-font-regular!important; 
+}
+.el-table td, .el-table th {
+    height: 3.75rem !important;
+}
+.el-table--enable-row-hover .el-table__body tr:hover>td {
+    background-color: #323150 !important;
+}
+.el-table::after, .el-table::before {
+     background-color: @color-backgound-regular!important;; 
+}
+.el-table__body tr.hover-row>td {
+  background-color: #323150 !important;
+}
+.el-date-editor--datetimerange.el-input {
+  margin-left: 0.5rem;
+}
+.el-date-editor.el-input {
+  z-index: 999;
+}
+.el-input__inner {
+    background-color: @color-backgound-regular!important;
+    border: 0.06rem solid rgba(111, 109, 173, 0.30)!important;
+    height: 2rem!important;
+    font-size: @size-text-large!important;
+    color: @color-font-light!important;
+    border-radius: none!important;
+}
+
