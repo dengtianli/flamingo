@@ -1,0 +1,16 @@
+{
+  "head": {
+    "status": 200,
+    "token": null,
+    "message": null,
+    "total": 1
+  },
+  "body": [{
+    "promise":47,
+    "management":71.68,
+    "currentManagent":30.99,
+    "advancesManagent":98.56,
+    "punctualManagent":100,
+    "siteManagent":98
+    }]
+}

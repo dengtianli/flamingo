@@ -1,0 +1,27 @@
+{
+  "head": {
+    "status": 200,
+    "token": null,
+    "message": null,
+    "total": 6
+  },
+   "body": [{
+    "OrganNameAccept": "成都",
+    "acceptNum": 1180 
+  }, {
+    "OrganNameAccept":  "绵阳",
+    "acceptNum": 580
+  }, {
+    "OrganNameAccept":  "雅安",
+    "acceptNum": 820
+  }, {
+    "OrganNameAccept": "达州",
+    "acceptNum":600
+  },{
+    "OrganNameAccept":  "攀枝花",
+    "acceptNum":420
+  },{
+    "OrganNameAccept":  "广元",
+    "acceptNum":740
+  }]
+}

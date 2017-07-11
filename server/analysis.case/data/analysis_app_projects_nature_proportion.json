@@ -1,0 +1,22 @@
+{
+  "head": {
+    "status": 200,
+    "token": null,
+    "message": null,
+    "total": 2
+  },
+  "body": [
+    {
+      "value": 435,
+      "name": "行政审批"
+    },
+    {
+      "value": 310,
+      "name": "公共服务"
+    },
+    {
+      "value": 234,
+      "name": "其它服务"
+    }
+  ]
+}

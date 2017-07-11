@@ -1,0 +1,39 @@
+{
+  "head": {
+    "status": 200,
+    "token": null,
+    "message": null,
+    "total": 7
+  },
+  "body": [{
+      "value": 335,
+       "name": "未评价"
+    },{
+      "value": 1350,
+       "name": "已评价"
+    }, {
+      "value": 335,
+      "name": "非常满意"
+    },
+    {
+      "value": 310,
+      "name": "基本满意"
+    },
+    {
+      "value": 234,
+      "name": "态度不好"
+    },
+    {
+      "value": 135,
+      "name": "时间太长"
+    },
+    {
+      "value": 1048,
+      "name": "业务不熟"
+    },
+    {
+      "value": 251,
+      "name": "有待改进"
+    }
+  ]
+}
