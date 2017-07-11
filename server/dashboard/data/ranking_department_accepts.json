@@ -1,0 +1,27 @@
+{
+  "head": {
+    "status": 200,
+    "token": null,
+    "message": null,
+    "total": 6
+  },
+  "body": [{
+    "OrganNameAccept": "交通运输厅",
+    "acceptNum": 700
+  }, {
+    "OrganNameAccept": "林业厅",
+    "acceptNum": 980
+  }, {
+    "OrganNameAccept": "文化厅",
+    "acceptNum": 850
+  }, {
+    "OrganNameAccept": "国土资源厅",
+    "acceptNum":600
+  },{
+    "OrganNameAccept": "省卫生卫计厅",
+    "acceptNum":300
+  },{
+    "OrganNameAccept":"省工商局",
+    "acceptNum":410
+  }]
+}

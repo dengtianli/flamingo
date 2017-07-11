@@ -16,7 +16,7 @@
   export default {
     props:["title","rate","flag"],
     mounted(rate) {
-      console.log(this.rate)
+      // console.log(this.rate)
       chart("."+this.flag, {
         tooltip: {
           formatter: "{a} <br/>{c} {b}"
@@ -27,7 +27,7 @@
           min: 0,
           max: 100,
           splitNumber: 10,
-          radius: '80%',
+          radius: '93%',
           axisLine: { // 坐标轴线
             lineStyle: { // 属性lineStyle控制线条样式
               color: [

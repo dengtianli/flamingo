@@ -6,24 +6,24 @@
     "total": 4
   },
   "body": [{
-    "promiseCount": 0,
-    "totalCount": 0,
+    "promiseCount": 196,
+    "totalCount": 1538,
     "QuarterType": "FIRST",
-    "instantCount": 0
+    "instantCount": 1238
   }, {
-    "promiseCount": 1,
-    "totalCount": 1,
+    "promiseCount": 200,
+    "totalCount": 2335,
     "QuarterType": "SECOND",
-    "instantCount": 0
+    "instantCount": 2135
   }, {
-    "promiseCount": 141,
-    "totalCount": 239,
+    "promiseCount": 700,
+    "totalCount": 1700,
     "QuarterType": "THIRD",
-    "instantCount": 98
+    "instantCount": 1000
   }, {
-    "promiseCount": 12,
-    "totalCount": 14,
+    "promiseCount": 300,
+    "totalCount": 600,
     "QuarterType": "FOURTH",
-    "instantCount": 2
+    "instantCount": 300
   }]
 }

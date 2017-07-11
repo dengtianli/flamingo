@@ -44,3 +44,4 @@ app.use("/", require("./login/api"));
 app.use("/", require("./system/api"));
 app.use("/", require("./dashboard/api"));
 app.use("/", require("./analysis-transact/api"));
+app.use("/", require("./analysis.case/api"));

@@ -13,5 +13,13 @@ router.route("/dashboard")
   .get(function (request, response) {
     response.json(util.json("/dashboard/data/ranking_department_accepts.json"));
   });
+   router.route("/ranking/region_accepts")
+  .get(function (request, response) {
+    response.json(util.json("/dashboard/data/ranking_region_accepts.json"));
+  });
+  router.route("/ranking/hort_projects")
+  .get(function (request, response) {
+    response.json(util.json("/dashboard/data/ranking_hort_projects.json"));
+  });
 
 module.exports = router;

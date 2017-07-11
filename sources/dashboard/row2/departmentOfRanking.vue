@@ -24,41 +24,40 @@
 </template>
 <script>
   import Http from "../../common/http.js";
-  import {
-    chart
-  } from "../../common/helper.js";
+  import echarts from "echarts";
   import { Notification  } from 'element-ui';
+  import Moment from "moment";
+  import $ from "jquery";
   const master = Http.url.master;
   export default {
     data() {
       return {
-        value: '',
+        value: new Date('2017-01'),
       }
     },
     mounted() {
-      // Http.fetch({
-      //     method: "get",
-      //     url: master + "/ranking/department_accepts",
-      //     params: {
-      //        top: 6 ,
-      //        beginTime:'2016' ,
-      //        endTime: ''
-      //     }
-      //   }).then(
-      //     function (result) {
-      //      console.log(result.data)
-      //       if(result.data.head.status==200){
-      //          console.log(result.data)
-      //       }else{
-      //         Notification ({
-      //           type: 'warning',
-      //           message: result.data.head.message,
-      //           // offset:100
-      //         });
-      //       }
-           
-      //     });
-      chart(".department-chart-content", {
+      const vm = this;
+      const currentMonth =Moment(vm._data.value).format('MM');
+      const beginTime =Moment().year()+"-"+currentMonth+"-01 00:00:00";
+      console.log(beginTime);
+      vm.departmentRank(beginTime)
+     
+    },
+    watch :{
+      value :function (val,oldVal){
+        console.log(Moment(val).format('YYYY-MM-DD HH:mm:ss'))
+        this.departmentRank(Moment(val).format('YYYY-MM-DD HH:mm:ss'))
+      }
+    },
+    methods: {
+      goDetail () {
+        this.$router.push("/layout/dashboard-detail/部门排名详情");
+      },
+      showChart (name,value){
+        console.log(name)
+        echarts.dispose(document.querySelector(".department-chart-content"));
+        const chart =echarts.init(document.querySelector(".department-chart-content"));
+        chart.setOption({
         tooltip: {
           trigger: 'axis',
           axisPointer: { 
@@ -76,7 +75,8 @@
           fontSize: 12
         },
         xAxis: {
-          data: ["交通运输厅", "林业厅", "文化厅", "国土资源厅", "省卫生卫计厅", "省工商局"],
+          // data: ["交通运输厅", "林业厅", "文化厅", "国土资源厅", "省卫生卫计厅", "省工商局"],
+          data: name,
           type: 'category',
           axisTick: {
             alignWithLabel: true
@@ -94,7 +94,7 @@
           },
         },
         series: [{
-          name: "部门排名",
+          name: "受理件数",
           type: "bar",
           barWidth: '50%',
           itemStyle: {
@@ -113,14 +113,44 @@
               }
             }
           },
-          data: [700, 980, 850, 600, 300, 410]
+          // data: [700, 980, 850, 600, 300, 410]
+          data: value
         }]
       });
-    },
-    methods: {
-      goDetail () {
-        this.$router.push("/layout/dashboard-detail");
+      },
+      departmentRank(beginTime){
+        const vm = this;
+        Http.fetch({
+          method: "get",
+          url: master + "/ranking/department_accepts",
+          params: {
+             top: 6 ,
+             beginTime:beginTime ,
+             endTime: ''
+          }
+        }).then(
+          function (result) {
+            if(result.data.head.status==200){
+              //  console.log(result.data)
+               let data = result.data.body;
+               let name =[];
+               let value =[];
+               for(let i in data ){
+                 name.push(data[i].OrganNameAccept);
+                 value.push(data[i].acceptNum);
+               }
+               vm.showChart(name,value);
+            }else{
+              Notification ({
+                type:"error",
+                title: '部门排名情况',
+                message: result.data.head.message,
+              });
+            }
+           
+          });
       }
+
     }
   };
 </script>

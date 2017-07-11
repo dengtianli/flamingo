@@ -90,13 +90,13 @@ a:active {
     height: 3.75rem !important;
 }
 .el-table--enable-row-hover .el-table__body tr:hover>td {
-    background-color: #323150 !important;
+    background-color: @color-backgound-light !important;
 }
 .el-table::after, .el-table::before {
      background-color: @color-backgound-regular!important;; 
 }
 .el-table__body tr.hover-row>td {
-  background-color: #323150 !important;
+  background-color: @color-backgound-light !important;
 }
 .el-date-editor--datetimerange.el-input {
   margin-left: 0.5rem;
@@ -132,4 +132,31 @@ a:active {
   border-bottom-left-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
 }
+.el-tree {
+  background: @color-backgound-regular !important;
+  border: none !important;
+  border-radius: 0.25rem !important;
+  color: @color-font-light;
+}
+.el-tree-node__content:hover {
+    background: @color-backgound-light!important;
+}
+//  ::-webkit-scrollbar {
+//     width: 7px;
+//     height: 7px;
+//     background-color: transparent;
+//   }
+//    ::-webkit-scrollbar-thumb {
+//     background: rgba(221, 75, 57, 0.6);
+//     border-radius: 1rem;
+//   }
+  ::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.4rem;
+    background-color: transparent;
+  }
+   ::-webkit-scrollbar-thumb {
+    background: rgba(210, 214, 222, 0.6);
+    border-radius: 1rem;
+  }
 

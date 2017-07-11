@@ -21,11 +21,11 @@
   import Http from "../../common/http.js";
   import echarts from "echarts";
   import $ from "jquery";
-  // const master = Http.url.master;
+  const master = Http.url.master;
   export default {
     data() {
       return {
-        value3: [new Date(1900), new Date(2099, 10, 11, 10, 10)],
+        value3: [new Date('2014'), new Date('2017')],
       }
     },
     mounted() {
@@ -37,7 +37,8 @@
       var name = 'sichuan';
       Http.fetch({
         method: "get",
-        url: "http://localhost:5001/dashboard",
+        // url: "http://localhost:5001/dashboard",
+        url:  master + "/dashboard",
       }).then(function(result) {
         echart.hideLoading();
         echarts.registerMap(name, result.data.body[0]);

@@ -4,7 +4,7 @@ import Axios from "axios";
 export default {
   url: window.url,
   fetch: Axios.create({
-    timeout: 1000,
+    // timeout: 1000,
     withCredentials: false
   }),
   protocol(data, status) {

@@ -35,11 +35,11 @@ const router = new VueRouter({
       },
       component: resolve => require(["./dashboard/index.vue"], resolve),
     },{
-        path: "dashboard-detail",
+        path: "dashboard-detail/:name",
         meta: {
           auth: true
         },
-        component: resolve => require(["./dashboard/row2/detail/index.vue"], resolve),
+        component: resolve => require(["./dashboard/detail/index.vue"], resolve),
     },{
       path: "analysis-case",
       meta: {

@@ -30,11 +30,11 @@
     </div>
     <div class="navigator">
       <div class="menu">
-        <el-menu theme="dark" default-active="dashboard" mode="horizontal" router>
-          <el-menu-item index="dashboard">首页</el-menu-item>
-          <el-menu-item index="analysis-case">事项分析</el-menu-item>
-          <el-menu-item index="analysis-transact">办件分析</el-menu-item>
-          <el-menu-item index="analysis-transactor">办件人来源分析</el-menu-item>
+        <el-menu theme="dark" default-active="/layout/dashboard" mode="horizontal" router>
+          <el-menu-item index="/layout/dashboard">首页</el-menu-item>
+          <el-menu-item index="/layout/analysis-case">事项分析</el-menu-item>
+          <el-menu-item index="/layout/analysis-transact">办件分析</el-menu-item>
+          <el-menu-item index="/layout/analysis-transactor">办件人来源分析</el-menu-item>
         </el-menu>
       </div>
     </div>

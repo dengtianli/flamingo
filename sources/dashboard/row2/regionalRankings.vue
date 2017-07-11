@@ -20,87 +20,141 @@
 </template>
 <script>
   import Http from "../../common/http.js";
+  import echarts from "echarts";
   import {
-    chart
-  } from "../../common/helper.js";
+    Notification
+  } from 'element-ui';
+  import Moment from "moment";
+  import $ from "jquery";
+  const master = Http.url.master;
   export default {
     data() {
       return {
-        value: ''
+        value: new Date('2017-01')
       }
     },
     mounted() {
-      chart(".region-chart-content", {
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'shadow'
-          }
-        },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true,
-        },
-        xAxis: {
-          data: ["成都", "绵阳", "雅安", "达州", "攀枝花", "广元"],
-          type: 'category',
-          name: '城市',
-          axisTick: {
-            alignWithLabel: true
-          },
-          axisLabel: {
-            textStyle: {
-              color: '#52547D',
-              fontSize: 12
-            }
-          }
-        },
-        yAxis: {
-          axisLabel: {
-            textStyle: {
-              color: '#52547D',
-              fontSize: 12
-            }
-          },
-          splitLine: {
-            show: true,
-            lineStyle: {
-              color: '#52547D',
-              fontSize: 12
-            }
-          },
-        },
-        series: [{
-          name: "部门排名",
-          type: "bar",
-          barWidth: '50%',
-          itemStyle: {
-            normal: {
-              color: {
-                type: 'linear',
-                x: 0,
-                y: 0,
-                x2: 0,
-                y2: 1,
-                colorStops: [{
-                  offset: 1,
-                  color: '#292742'
-                }, {
-                  offset: 0,
-                  color: '#FF5C91'
-                }],
-              }
-            }
-          },
-          data: [1180, 580, 820, 600, 420, 740]
-        }]
-      });
+      const vm = this;
+      const currentMonth = Moment(vm._data.value).format('MM');
+      const beginTime = Moment().year() + "-" + currentMonth + "-01 00:00:00";
+      console.log(beginTime);
+      vm.regionalRank(beginTime)
+    },
+    watch: {
+      value: function(val, oldVal) {
+        console.log(Moment(val).format('YYYY-MM-DD HH:mm:ss'))
+        this.regionalRank(Moment(val).format('YYYY-MM-DD HH:mm:ss'))
+      }
     },
     methods: {
       goDetail() {
-        this.$router.push("/layout/dashboard-detail");
+        this.$router.push("/layout/dashboard-detail/地区排名详情");
+      },
+      showChart(name, value) {
+        console.log(name)
+        echarts.dispose(document.querySelector(".region-chart-content"));
+        const chart = echarts.init(document.querySelector(".region-chart-content"));
+        chart.setOption({
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'shadow'
+            }
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true,
+          },
+          xAxis: {
+            // data: ["成都", "绵阳", "雅安", "达州", "攀枝花", "广元"],
+            data: name,
+            type: 'category',
+            name: '城市',
+            axisTick: {
+              alignWithLabel: true
+            },
+            axisLabel: {
+              textStyle: {
+                color: '#52547D',
+                fontSize: 12
+              }
+            }
+          },
+          yAxis: {
+            axisLabel: {
+              textStyle: {
+                color: '#52547D',
+                fontSize: 12
+              }
+            },
+            splitLine: {
+              show: true,
+              lineStyle: {
+                color: '#52547D',
+                fontSize: 12
+              }
+            },
+          },
+          series: [{
+            name: "受理件数",
+            type: "bar",
+            barWidth: '50%',
+            itemStyle: {
+              normal: {
+                color: {
+                  type: 'linear',
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [{
+                    offset: 1,
+                    color: '#292742'
+                  }, {
+                    offset: 0,
+                    color: '#FF5C91'
+                  }],
+                }
+              }
+            },
+            // data: [1180, 580, 820, 600, 420, 740]
+            data: value
+          }]
+        });
+      },
+      regionalRank(beginTime) {
+        const vm = this;
+        Http.fetch({
+          method: "get",
+          // url: master + "/ranking/region_accepts",
+          url:  "http://localhost:5001/ranking/region_accepts",
+          params: {
+            top: 6,
+            beginTime: beginTime,
+            endTime: ''
+          }
+        }).then(
+          function(result) {
+            if (result.data.head.status == 200) {
+              //  console.log(result.data)
+              let data = result.data.body;
+              let name = [];
+              let value = [];
+              for (let i in data) {
+                name.push(data[i].OrganNameAccept);
+                value.push(data[i].acceptNum);
+              }
+              vm.showChart(name, value);
+            } else {
+              Notification({
+                type: "error",
+                title: '地区排名情况',
+                message: result.data.head.message,
+              });
+            }
+          });
       }
     }
   };

@@ -57,7 +57,7 @@ export default {
       url: master + "/sys/logs"
     })
       .then(function (result) {
-        console.log(result.data.head);
+        // console.log(result.data.head);
       })
   }
 };

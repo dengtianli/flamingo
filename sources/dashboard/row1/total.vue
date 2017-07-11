@@ -48,22 +48,17 @@
         }
       }
     },
-    beforeMount() {
+    mounted() {
       const vm = this;
       Http.fetch({
           method: "get",
           url: master + "/approval/projects",
-          // params: {
-          //   beginTime: '2017-04-12 12:12:00',
-          //   endTime: '2017-04-19 12:12:00'
-          // }
         }).then(function(result) {
-          console.log(result.data)
+          // console.log(result.data)
           if (result.data.head.status == 200) {
              vm._data.total=result.data.body[0];
           } else {
             Notification({
-              type: 'warning',
               title: '行政审批办件情况的累计汇总',
               message: result.data.head.message
               // offset:100
