@@ -27,7 +27,6 @@
   import echarts from "echarts";
   import { Notification  } from 'element-ui';
   import Moment from "moment";
-  import $ from "jquery";
   const master = Http.url.master;
   export default {
     data() {
@@ -39,13 +38,13 @@
       const vm = this;
       const currentMonth =Moment(vm._data.value).format('MM');
       const beginTime =Moment().year()+"-"+currentMonth+"-01 00:00:00";
-      console.log(beginTime);
+      // console.log(beginTime);
       vm.departmentRank(beginTime)
      
     },
     watch :{
       value :function (val,oldVal){
-        console.log(Moment(val).format('YYYY-MM-DD HH:mm:ss'))
+        // console.log(Moment(val).format('YYYY-MM-DD HH:mm:ss'))
         this.departmentRank(Moment(val).format('YYYY-MM-DD HH:mm:ss'))
       }
     },
@@ -54,7 +53,7 @@
         this.$router.push("/layout/dashboard-detail/部门排名详情");
       },
       showChart (name,value){
-        console.log(name)
+        // console.log(name)
         echarts.dispose(document.querySelector(".department-chart-content"));
         const chart =echarts.init(document.querySelector(".department-chart-content"));
         chart.setOption({

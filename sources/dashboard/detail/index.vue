@@ -15,7 +15,7 @@
           <div class="time-position">
             <div class="block">
               <span class="demonstration">统计时间</span>
-              <el-date-picker v-model="value" type="month" format="yyyy 年 MM 月" placeholder="选择月份">
+              <el-date-picker v-model="value" type="datetimerange" placeholder="选择时间范围">
               </el-date-picker>
             </div>
           </div>
@@ -59,355 +59,205 @@
 </template>
 <script>
   import Http from "../../common/http.js";
-  import {
-    chart
-  } from "../../common/helper.js";
+  import echarts from "echarts";
+  import { Notification  } from 'element-ui';
+  import Moment from "moment";
+  const master = Http.url.master;
   export default {
     data() {
       return {
         name:"部门排名详情",
-        value: new Date('2016-01'),
-        tableData: [{
-          regionName: '交通运输厅',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, {
-          regionName: '林业厅',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, {
-          regionName: '文化厅',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, {
-          regionName: '人力资源社会保障厅',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, {
-          regionName: '省新闻出版广电局',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, {
-          regionName: '国土资源厅',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, {
-          regionName: '省卫生卫计委',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, {
-          regionName: '省工商局',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, {
-          regionName: '省经济信息化委',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, {
-          regionName: '文化厅',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, {
-          regionName: '文化厅',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, {
-          regionName: '文化厅',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, {
-          regionName: '文化厅',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, {
-          regionName: '文化厅',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, {
-          regionName: '文化厅',
-          applyNum: '1233',
-          acceptNum: '1233',
-          managedNum: '1233',
-          managedRate: '100%',
-          backoutNUm: '3',
-          delayNum: '3',
-          timelyRate: '3%',
-          promiseSpeedup: '3%',
-          manageSpeedup: '3%',
-          currentManagedRate: '3%',
-          advancesManagedRate: '3%',
-          punctualManagedRate: '3%'
-        }, ]
+        value: [new Date('2014'), new Date('2017')],
+        tableData: []
       }
     },
     mounted() {
       const vm = this;
-      console.log(vm.$route.params)
+      // console.log(vm.$route.params)
       vm._data.name =vm.$route.params.name;
-      chart(".detail-management-chart", {
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'cross',
-            crossStyle: {
-              color: '#999'
+      const beginTime =Moment(vm._data.value[0]).format('YYYY-MM-DD HH:mm:ss')
+      const endTime =Moment(vm._data.value[1]).format('YYYY-MM-DD HH:mm:ss')
+      // console.log(beginTime,endTime);
+      vm.getCharts(beginTime,endTime)
+    },
+    watch :{
+      value :function (value,oldVal){
+        const vm = this;
+        const beginTime =Moment(value[0]).format('YYYY-MM-DD HH:mm:ss')
+        const endTime =Moment(value[1]).format('YYYY-MM-DD HH:mm:ss')
+        // console.log(beginTime,endTime);
+        vm.getCharts(beginTime,endTime)
+      }
+    },
+    methods: {
+      showChart (regionName,acceptNum,managedRate){
+        // console.log(regionName)
+        echarts.dispose(document.querySelector(".detail-management-chart"));
+        const chart =echarts.init(document.querySelector(".detail-management-chart"));
+        chart.setOption({
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'cross',
+              crossStyle: {
+                color: '#999'
+              }
             }
-          }
-        },
-        legend: {
-          data: ['受理件数', '办结率'],
-          right: 10,
+          },
+          legend: {
+            data: ['受理件数', '办结率'],
+            right: 10,
+            textStyle: {
+              color: '#52547D',
+              fontSize: 12
+            },
+          },
+          grid: {
+            left: '2%',
+            right: '2%',
+            bottom: '5%',
+            containLabel: true,
+          },
           textStyle: {
             color: '#52547D',
             fontSize: 12
           },
-        },
-        grid: {
-          left: '2%',
-          right: '2%',
-          bottom: '5%',
-          containLabel: true,
-        },
-        textStyle: {
-          color: '#52547D',
-          fontSize: 12
-        },
-        xAxis: [{
-          type: 'category',
-          data: ['交通厅', '林业厅', '文化厅', '社保厅', '广电局', '国土厅', '省卫计委', '省工商局', '省级纪委', '民政厅', '司法厅', '环境保护厅', '住建厅', '商务厅', '省地税局', '省旅游局', '省质监局', '省体育局', '省统计局', '省食药监'],
-          axisPointer: {
-            type: 'shadow'
-          },
-          axisTick: {
-            alignWithLabel: true
-          },
-          axisLabel: {
-            interval: 0,
-            align: 'left'
-          }
-        }],
-        yAxis: [{
-            type: 'value',
-            name: '受理件数',
-            min: 0,
-            max: 2000,
-            interval: 250,
-            splitLine: {
-              show: true,
-              lineStyle: {
-                color: '#52547D',
-              }
+          xAxis: [{
+            type: 'category',
+            // data: ['交通厅', '林业厅', '文化厅', '社保厅', '广电局', '国土厅', '省卫计委', '省工商局', '省级纪委', '民政厅', '司法厅', '环境保护厅', '住建厅', '商务厅', '省地税局', '省旅游局', '省质监局', '省体育局', '省统计局', '省食药监'],
+            data:regionName,
+            axisPointer: {
+              type: 'shadow'
             },
-          },
-          {
-            type: 'value',
-            name: '办结率',
-            min: 0,
-            max: 100,
-            interval: 30,
+            axisTick: {
+              alignWithLabel: true
+            },
             axisLabel: {
-              formatter: '{value} %',
-            },
-            splitLine: {
-              show: true,
-              lineStyle: {
-                color: '#52547D',
-              }
-            },
-          }
-        ],
-        series: [{
-            name: '受理件数',
-            type: 'bar',
-            barWidth: '50%',
-            itemStyle: {
-              normal: {
-                color: {
-                  type: 'linear',
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [{
-                    offset: 0,
-                    color: '#04E8C9' // 0% 处的颜色
-                  }, {
-                    offset: 1,
-                    color: '#292742' // 100% 处的颜色
-                  }],
+              interval: 0,
+              align: 'left'
+            }
+          }],
+          yAxis: [{
+              type: 'value',
+              name: '受理件数',
+              min: 0,
+              max: 2000,
+              interval: 250,
+              splitLine: {
+                show: true,
+                lineStyle: {
+                  color: '#52547D',
                 }
-              }
+              },
             },
-            data: [750, 1450, 490, 1875, 900, 800, 1050, 650, 1650, 1200, 1950, 1450, 490, 1100, 1240, 1700, 300, 1300, 1950, 800]
-          },
-          {
-            name: '办结率',
-            type: 'line',
-            yAxisIndex: 1,
-            itemStyle: {
-              normal: {
-                color: {
-                  type: 'linear',
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [{
-                    offset: 0,
-                    color: '#4880FD' // 0% 处的颜色
-                  }, {
-                    offset: 1,
-                    color: '#473CB4' // 100% 处的颜色
-                  }],
+            {
+              type: 'value',
+              name: '办结率',
+              min: 0,
+              max: 100,
+              interval: 30,
+              axisLabel: {
+                formatter: '{value} %',
+              },
+              splitLine: {
+                show: true,
+                lineStyle: {
+                  color: '#52547D',
                 }
-              }
+              },
+            }
+          ],
+          series: [{
+              name: '受理件数',
+              type: 'bar',
+              barWidth: '50%',
+              itemStyle: {
+                normal: {
+                  color: {
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [{
+                      offset: 0,
+                      color: '#04E8C9' // 0% 处的颜色
+                    }, {
+                      offset: 1,
+                      color: '#292742' // 100% 处的颜色
+                    }],
+                  }
+                }
+              },
+              // data: [750, 1450, 490, 1875, 900, 800, 1050, 650, 1650, 1200, 1950, 1450, 490, 1100, 1240, 1700, 300, 1300, 1950, 800]
+              data:acceptNum
             },
-            data: [70, 90, 77, 80, 68, 72, 65, 85, 92, 78, 82, 75, 50, 61, 55, 75, 40, 85, 80, 58]
-          }
-        ]
+            {
+              name: '办结率',
+              type: 'line',
+              yAxisIndex: 1,
+              itemStyle: {
+                normal: {
+                  color: {
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [{
+                      offset: 0,
+                      color: '#4880FD' // 0% 处的颜色
+                    }, {
+                      offset: 1,
+                      color: '#473CB4' // 100% 处的颜色
+                    }],
+                  }
+                }
+              },
+              // data: [70, 90, 77, 80, 68, 72, 65, 85, 92, 78, 82, 75, 50, 61, 55, 75, 40, 85, 80, 58]
+              data:managedRate
+            }
+          ]
       });
-    },
-    methods: {}
+      },
+      getCharts(beginTime,endTime){
+        const vm = this;
+        Http.fetch({
+          method: "get",
+          url: master + "/departments_manage_items",
+          params: {
+             beginTime:beginTime ,
+             endTime: beginTime,endTime
+          }
+        }).then(
+          function (result) {
+            if(result.data.head.status==200){
+              //  console.log(result.data)
+               let data = result.data.body;
+               vm.tableData =result.data.body;
+               let regionName =[]; //部门名字
+               let acceptNum =[];//受理件数
+               let managedRate =[];//办结率
+               for(let i in data ){
+                 regionName.push(data[i].regionName);
+                 acceptNum.push(data[i].acceptNum);
+                 let length =data[i].managedRate.length;
+                 let rate =data[i].managedRate;
+                 managedRate.push(rate.substring(0,length-1))
+               }
+               vm.showChart(regionName,acceptNum,managedRate);
+            }else{
+              Notification ({
+                type:"error",
+                title: '各单位行政审批情况',
+                message: result.data.head.message,
+              });
+            }
+           
+          });
+      }
+
+    }
   };
 </script>
 <style lang="less" scoped>

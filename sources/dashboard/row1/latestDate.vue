@@ -83,7 +83,7 @@
       const end = new Date();
       const start = new Date();
       start.setTime(start.getTime() - 3600 * 1000 * 24 );
-      console.log(Moment(start).format('YYYY-MM-DD HH:mm:ss'), Moment(end).format('YYYY-MM-DD HH:mm:ss'));
+      // console.log(Moment(start).format('YYYY-MM-DD HH:mm:ss'), Moment(end).format('YYYY-MM-DD HH:mm:ss'));
       Http.fetch({
         method: "get",
         url: master + "/approval/projects",
@@ -92,7 +92,7 @@
           endTime: Moment(end).format('YYYY-MM-DD HH:mm:ss')
         }
       }).then(function(result) {
-        console.log(result.data)
+        // console.log(result.data)
         if (result.data.head.status == 200) {
           vm._data.total = result.data.body[0];
         } else {
@@ -106,7 +106,7 @@
     },
     methods: {
       handleClick(activeName) {
-        console.log(activeName)
+        // console.log(activeName)
         const vm = this;
         var params = {};
         var datetime ='昨天';

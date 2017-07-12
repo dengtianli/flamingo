@@ -21,8 +21,8 @@
 <script>
   import Http from "../../common/http.js";
   import echarts from "echarts";
-  import $ from "jquery";
-  // const master = Http.url.master;
+  import Axios from "axios";
+  const master = Http.url.master;
   export default {
     data() {
       return {
@@ -39,6 +39,7 @@
       Http.fetch({
         method: "get",
         url: "http://localhost:5001/dashboard",
+        // url:  master + "/dashboard",
       }).then(function(result) {
         echart.hideLoading();
         echarts.registerMap(name, result.data.body[0]);

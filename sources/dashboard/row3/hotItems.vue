@@ -39,7 +39,6 @@
     Notification
   } from 'element-ui';
   import Moment from "moment";
-  import $ from "jquery";
   const master = Http.url.master;
   export default {
     data() {

@@ -21,5 +21,13 @@ router.route("/dashboard")
   .get(function (request, response) {
     response.json(util.json("/dashboard/data/ranking_hort_projects.json"));
   });
+  router.route("/sichuan_region/department_accepts")
+  .get(function (request, response) {
+    response.json(util.json("/dashboard/data/sichuan_region_depatrment_accepts.json"));
+  });
+   router.route("/departments_manage_items")
+  .get(function (request, response) {
+    response.json(util.json("/dashboard/data/departments_manage_items.json"));
+  });
 
 module.exports = router;

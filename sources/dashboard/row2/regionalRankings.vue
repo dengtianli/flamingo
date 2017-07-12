@@ -25,7 +25,6 @@
     Notification
   } from 'element-ui';
   import Moment from "moment";
-  import $ from "jquery";
   const master = Http.url.master;
   export default {
     data() {
@@ -37,12 +36,12 @@
       const vm = this;
       const currentMonth = Moment(vm._data.value).format('MM');
       const beginTime = Moment().year() + "-" + currentMonth + "-01 00:00:00";
-      console.log(beginTime);
+      // console.log(beginTime);
       vm.regionalRank(beginTime)
     },
     watch: {
       value: function(val, oldVal) {
-        console.log(Moment(val).format('YYYY-MM-DD HH:mm:ss'))
+        // console.log(Moment(val).format('YYYY-MM-DD HH:mm:ss'))
         this.regionalRank(Moment(val).format('YYYY-MM-DD HH:mm:ss'))
       }
     },
@@ -51,7 +50,7 @@
         this.$router.push("/layout/dashboard-detail/地区排名详情");
       },
       showChart(name, value) {
-        console.log(name)
+        // console.log(name)
         echarts.dispose(document.querySelector(".region-chart-content"));
         const chart = echarts.init(document.querySelector(".region-chart-content"));
         chart.setOption({
